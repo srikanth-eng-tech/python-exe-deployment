@@ -29,11 +29,11 @@ jobs:
       id: create_release
       uses: softprops/action-gh-release@v1
       with:
-        tag_name: latest
-        name: Latest EXE Release
-        body: "Automated EXE build"
+        tag_name: v${{ github.run_number }}
+        name: EXE Release ${{ github.run_number }}
+        body: Automated EXE build
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
 
     - name: Upload EXE
       uses: actions/upload-release-asset@v1
@@ -42,3 +42,5 @@ jobs:
         asset_path: dist/myapp.exe
         asset_name: myapp.exe
         asset_content_type: application/octet-stream
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
